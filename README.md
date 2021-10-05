@@ -1,6 +1,6 @@
 # PengKomProject
 Repository for our group's PengKom projects.
 
-Dalam repo ini, kita akan mencoba untuk membuat sebuah project kecil dengan tujuan untuk berlatih.
+Repository ini akan ditujukan untuk tugas besar pengenalan komputasi kelompok 1
 
-Project pertama yang akan kita buat adalah Youtube Video Downloader.
+Tema tugas besar: pencarian rute dalam aplikasi google maps
