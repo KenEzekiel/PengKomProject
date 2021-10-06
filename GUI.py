@@ -6,6 +6,8 @@ from PIL import ImageTk, Image
 
 root = Tk()
 root.title("Map")
+count = 0
+loop = True
 
 # mapImage = ImageTk.PhotoImage(Image.open("logo_itb_1024.png"))
 peta = [[1, 0, 0, 0, 1, 0],
@@ -36,14 +38,22 @@ def destinationList():
         destination_label.pack()
 destinationList()
 
+def switch():
+    global myButton
+    if myButton["state"] == NORMAL:
+        myButton["state"] = DISABLED
+    else:
+        myButton["state"] = NORMAL
 
 def myClick():
+    switch()
     userInput()
 
-def button():
-    myButton = Button(root, text="Click me", command=myClick)
-    myButton.pack()
-button()
+# Deklarasi button
+
+myButton = Button(root, text="Click me", command=myClick)
+myButton.pack()
+
 
 # Deklarasi lokasi
 entry_lokasi_awal = Entry(root, width=50)
@@ -62,6 +72,7 @@ def userInput():
     lokasi_akhir = entry_lokasi_akhir.get()
     label_akhir = Label(root, text="Lokasi akhir yang dipilih adalah " + lokasi_akhir)
     label_akhir.pack()
+   
 
 root.mainloop()
 
