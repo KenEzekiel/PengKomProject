@@ -6,8 +6,6 @@ from PIL import ImageTk, Image
 
 root = Tk()
 root.title("Map")
-count = 0
-loop = True
 
 # mapImage = ImageTk.PhotoImage(Image.open("logo_itb_1024.png"))
 peta = [[1, 0, 0, 0, 1, 0],
