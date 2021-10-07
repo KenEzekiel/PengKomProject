@@ -5,4 +5,3 @@
 # Algorithm
 from GUI import *
 
-print(peta)
