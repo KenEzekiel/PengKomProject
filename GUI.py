@@ -47,12 +47,6 @@ def myClick():
     switch()
     userInput()
 
-# Deklarasi button
-
-myButton = Button(root, text="Click me", command=myClick)
-myButton.pack()
-
-
 # Deklarasi lokasi
 entry_lokasi_awal = Entry(root, width=50)
 entry_lokasi_awal.pack()
@@ -60,7 +54,11 @@ entry_lokasi_awal.insert(0, "Enter your position")
 
 entry_lokasi_akhir = Entry(root, width=50)
 entry_lokasi_akhir.pack()
-entry_lokasi_akhir.insert(0, "Enter your destination")
+entry_lokasi_akhir.insert(0, "Enter your destination")    
+
+# Deklarasi button
+myButton = Button(root, text="Click me", command=myClick)
+myButton.pack()
 
 def userInput():
     lokasi_awal = entry_lokasi_awal.get()
