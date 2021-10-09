@@ -10,9 +10,9 @@ root.title("Map")
 # mapImage = ImageTk.PhotoImage(Image.open("logo_itb_1024.png"))
 peta = [[1, 0, 0, 0, 1, 0],
         [1, 0, 0, 0, 1, 0],
-        [1, 1, 1, 1, 1, 0],
+        [2, 2, 1, 1, 1, 0],
         [1, 0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 1, 0]]
+        [1, 1, 2, 1, 1, 0]]
 
 def framePeta():
     frame = LabelFrame(root, text="Map", padx=50, pady=50)
