@@ -33,7 +33,7 @@ def framePeta():
 framePeta()
 
 def destinationList():
-    frame_destination = LabelFrame(root, text="Destination list", padx=10, pady=10)
+    frame_destination = LabelFrame(root, text="Destination list", padx=50, pady=50)
     frame_destination.grid(row=1, column=2)
     for text, destination in destination_list:
             destination_label = Label(frame_destination, text=text)
@@ -52,7 +52,7 @@ def myClick():
     userInput()
 
 # Deklarasi lokasi
-label_awal = LabelFrame(root, text="Lokasi Awal")
+label_awal = LabelFrame(root, text="Lokasi Awal", padx=50, pady=50)
 label_awal.grid(row=3, column=1)
 entry_lokasi_awal = StringVar()
 entry_lokasi_awal.set("Bandung")
@@ -60,7 +60,7 @@ for text, destination in destination_list:
     radio_awal = Radiobutton(label_awal, text=text, variable=entry_lokasi_awal, value=destination)
     radio_awal.grid()
 
-label_akhir = LabelFrame(root, text="Lokasi Akhir")
+label_akhir = LabelFrame(root, text="Lokasi Akhir", padx=50, pady=50)
 label_akhir.grid(row=3, column=2)
 entry_lokasi_akhir = StringVar()
 entry_lokasi_akhir.set("Jakarta")
@@ -70,7 +70,7 @@ for text, destination in destination_list:
 
 # Deklarasi button
 myButton = Button(root, text="Click me", command=myClick)
-myButton.grid(row=4, column=1, columnspan=2)
+myButton.grid(row=4, column=1, columnspan=2, padx=30)
 
 def userInput():
     frame_destinasi = LabelFrame(root, text="")
