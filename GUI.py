@@ -70,7 +70,7 @@ for text, destination in destination_list:
 
 # Deklarasi button
 myButton = Button(root, text="Click me", command=myClick)
-myButton.grid(row=4, column=1, columnspan=2, padx=30)
+myButton.grid(row=4, column=1, columnspan=2)
 
 def userInput():
     frame_destinasi = LabelFrame(root, text="")
