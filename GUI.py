@@ -14,6 +14,10 @@ peta = [[1, 0, 0, 0, 1, 0],
         [1, 0, 0, 0, 1, 0],
         [1, 1, 2, 1, 1, 0]]
 
+road = ImageTk.PhotoImage(Image.open("resources/road.png"))
+grass = ImageTk.PhotoImage(Image.open("resources/grass.png"))
+car = ImageTk.PhotoImage(Image.open("resources/car.png"))
+
 # List Destinasi pre-determined agar mengurangi kekompleksan, 
 # kedepannya bisa diganti menjadi suatu koordinat
 # dimana x = i, x >= 0, dan y = -j, y >= 0
@@ -29,7 +33,13 @@ def framePeta():
     for i in range(len(peta)):
         for j in range(len(peta[i])):
             labelpeta = Label(frame, text=peta[i][j])
-            labelpeta.grid(row=i, column=j)
+            if peta[i][j] == 0:
+                image = Label(frame, image=grass)
+            elif peta[i][j] == 1:
+                image = Label(frame, image=road)
+            elif peta[i][j] == 2:
+                image = Label(frame, image=car)
+            image.grid(row=i, column=j)
 framePeta()
 
 def destinationList():
