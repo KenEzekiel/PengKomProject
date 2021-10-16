@@ -8,7 +8,7 @@ from PIL import ImageTk, Image
 import random as rd
 
 root = Tk()
-root.title("Map")
+root.title("Map") 
 root.iconbitmap("resources/logo_itb.ico")
 # root.attributes('-alpha', 0.9)
 
@@ -25,6 +25,7 @@ peta = [[1, 0, 0, 0, 1, 0],
 road = ImageTk.PhotoImage(Image.open("resources/bigroad.png"))
 grass = ImageTk.PhotoImage(Image.open("resources/biggrass.png"))
 car = ImageTk.PhotoImage(Image.open("resources/bigcar.png"))
+dot = ImageTk.PhotoImage(Image.open("resources/bigdot.png"))
 pin = ImageTk.PhotoImage(Image.open("resources/bigpin.png"))
 
 # Background image
@@ -75,9 +76,9 @@ def framePeta():
             if peta[i][j] == 0:
                 image = Label(frame_peta, image=grass, bg="#B6D6EB")
             elif (i == first_location_coordinate[0]) and (j == first_location_coordinate[1]):
+                image = Label(frame_peta, image=dot, bg="#B6D6EB")
+            elif (i == final_location_coordinate[0]) and (j == final_location_coordinate[1]):
                 image = Label(frame_peta, image=pin, bg="#B6D6EB")
-#            elif (i == final_location_coordinate[0]) and (j == final_location_coordinate[1]):
-#                image = Label(frame_peta, image=pin, bg="#B6D6EB")
             elif peta[i][j] == 1:
                 image = Label(frame_peta, image=road, bg="#B6D6EB")
             elif peta[i][j] == 2:
@@ -116,7 +117,7 @@ def myClick():
     clear_frame(frame_peta)
 
     first_location_coordinate = locationFinder(entry_lokasi_awal.get())
-#    final_location_coordinate = locationFinder(entry_lokasi_akhir)
+    final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
     framePeta()
 
 def declareLocation():
@@ -181,7 +182,7 @@ def locationFinder(lokasi):
     elif lokasi == "ITB":
         return([2, 0])
 first_location_coordinate = locationFinder(entry_lokasi_awal.get())
-# final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
+final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
 framePeta()
 
 root.mainloop()
