@@ -1,5 +1,5 @@
 # Algorithm
-from GUI import peta
+from GUI_main_program import peta
 
 input_lokasi_awal = int(input("masukan lokasi awal: "))
 result = []

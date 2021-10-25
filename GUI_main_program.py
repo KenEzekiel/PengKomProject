@@ -16,17 +16,22 @@ Font_tuple = ("Product sans", 10, "bold")
 # canvas = tkinter.Canvas(root)
 # canvas.place(x=0, y=0)
 
-peta = [[1, 0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 1, 0],
-        [1, 1, 1, 1, 1, 0],
-        [1, 0, 0, 0, 1, 0],
-        [1, 1, 1, 1, 1, 0]]
+peta = [[1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
+        [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
-road = ImageTk.PhotoImage(Image.open("resources/bigroad.png"))
-grass = ImageTk.PhotoImage(Image.open("resources/biggrass.png"))
-car = ImageTk.PhotoImage(Image.open("resources/bigcar.png"))
-dot = ImageTk.PhotoImage(Image.open("resources/bigdot.png"))
-pin = ImageTk.PhotoImage(Image.open("resources/bigpin.png"))
+road = ImageTk.PhotoImage(Image.open("resources/road.png"))
+grass = ImageTk.PhotoImage(Image.open("resources/grass.png"))
+car = ImageTk.PhotoImage(Image.open("resources/car.png"))
+dot = ImageTk.PhotoImage(Image.open("resources/dot.png"))
+pin = ImageTk.PhotoImage(Image.open("resources/pin.png"))
 
 # Background image
 background_image = PhotoImage(file="resources/Wallpaper.png")
@@ -38,9 +43,9 @@ background_label.place(x=0, y=0)
 # dimana x = i, x >= 0, dan y = -j, y >= 0
 # y = -j berarti koordinat di kuadran 4, tetapi dianggap di kuadran 1
 destination_list = [("Bandung", "Bandung"), 
-                    ("Jakarta", "Jakarta"), 
-                    ("Bogor", "Bogor"),
-                    ("ITB", "ITB")]
+                    ("Jakarta", "Jakarta"),
+                    ("ITB", "ITB"),
+                    ("Bogor", "Bogor")]
 
 def positionVehicle():
     # Generates the number of cars that will add traffic
@@ -176,11 +181,11 @@ def locationFinder(lokasi):
     if lokasi == "Bandung":
         return([0, 0])
     elif lokasi == "Jakarta":
-        return([4, 4])
+        return([6, 7])
     elif lokasi == "Bogor":
-        return([0, 4])
+        return([7, 0])
     elif lokasi == "ITB":
-        return([2, 0])
+        return([0, 4])
 first_location_coordinate = locationFinder(entry_lokasi_awal.get())
 final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
 framePeta()

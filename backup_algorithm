@@ -1,0 +1,68 @@
+peta = [[1, 0, 0, 0, 1, 0],
+        [1, 0, 0, 0, 1, 0],
+        [1, 1, 1, 1, 1, 0],
+        [1, 0, 0, 0, 1, 0],
+        [1, 1, 1, 1, 1, 0]]
+
+start_x = 0
+start_y = 0
+end_x = 4
+end_y = 4
+
+
+def valid(moves):
+    i = start_y
+    j = start_x
+    for move in moves:
+        if move == "U":
+            i -= 1
+        elif move == "D":
+            i += 1
+        elif move == "L":
+            j -= 1
+        elif move == "R":
+            j += 1
+        
+    if not(0 <= i < len(peta) and 0 <= j < len(peta[0])):
+        return False
+    elif (peta[i][j] == 0):
+        return False
+    else: 
+        return True
+
+array_value = []
+def findEnd(moves):
+    i = start_y
+    j = start_x
+    value = 0
+    for move in moves:
+        if move == "U":
+            i -= 1
+        elif move == "D":
+            i += 1
+        elif move == "L":
+            j -= 1
+        elif move == "R":
+            j += 1
+        value += peta[i][j]
+        array_value.append(value)
+    if i == end_x and j == end_y:
+        print("Found: " + moves)
+        return True
+
+    return False
+
+
+# MAIN ALGORITHM
+
+moves = []
+add = moves
+while not findEnd(add): 
+    #print(add)
+    for j in ["L", "R", "U", "D"]:
+        put = []
+        put.append(add)
+        put.append(j)
+        if valid(put):
+            moves.append(j)
+print(moves)
