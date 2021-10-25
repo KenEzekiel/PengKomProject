@@ -16,22 +16,21 @@ Font_tuple = ("Product sans", 10, "bold")
 # canvas = tkinter.Canvas(root)
 # canvas.place(x=0, y=0)
 
-peta = [[1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
-        [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+peta = [[1, 1, 1, 1, 1, 0, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0, 0],
+        [1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]]
 
 road = ImageTk.PhotoImage(Image.open("resources/road.png"))
 grass = ImageTk.PhotoImage(Image.open("resources/grass.png"))
 car = ImageTk.PhotoImage(Image.open("resources/car.png"))
 dot = ImageTk.PhotoImage(Image.open("resources/dot.png"))
 pin = ImageTk.PhotoImage(Image.open("resources/pin.png"))
+highlight = ImageTk.PhotoImage(Image.open("resources/highlight.png"))
 
 # Background image
 background_image = PhotoImage(file="resources/Wallpaper.png")
