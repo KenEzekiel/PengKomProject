@@ -21,7 +21,7 @@ def createMaze2():
     maze.append(["#"," ", "#", " ", " ", " ", "#", " ", "#"])
     maze.append(["#"," ", "#", " ", "#", " ", "#", " ", "#"])
     maze.append(["#"," ", "#", " ", "#", " ", "#", " ", "#"])
-    maze.append(["#"," ", "#", " ", "#", " ", "#", "#", "#"])
+    maze.append(["#"," ", "#", " ", "#", " ", "#", " ", "#"])
     maze.append(["#"," ", " ", " ", " ", " ", " ", " ", "#"])
     maze.append(["#","#", "#", "#", "#", "#", "#", "X", "#"])
 
@@ -130,3 +130,4 @@ while not findEnd(maze, add):
         put = add + j
         if valid(maze, put):
             nums.put(put)
+print(len(put)-1)
