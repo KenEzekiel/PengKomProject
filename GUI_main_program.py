@@ -6,6 +6,7 @@ from tkinter import font
 import tkinter
 from PIL import ImageTk, Image
 import random as rd
+from queue import PriorityQueue
 
 root = Tk()
 root.title("Map") 
@@ -124,6 +125,10 @@ def myClick():
     final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
     framePeta()
 
+def startClick():
+    switch()
+    Algorithm()
+
 def declareLocation():
     global label_awal
     global entry_lokasi_awal
@@ -158,7 +163,7 @@ myButton.grid(row=4, column=1, columnspan=2)
 
 startButton = Button(root, 
                     text="Start Program",
-                    command=switch, bg="#B6D6EB", 
+                    command=startClick, bg="#B6D6EB", 
                     width=50, 
                     font=Font_tuple)
 startButton.grid(row=6, column=1, columnspan=2)
@@ -188,5 +193,52 @@ def locationFinder(lokasi):
 first_location_coordinate = locationFinder(entry_lokasi_awal.get())
 final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
 framePeta()
+
+def h(p1, p2):
+    x1, y1 = p1
+    x2, y2 = p2
+    return abs(x1 - x2) + abs(y1 - y2)
+
+def Algorithm(draw, grid, start, end):
+    nodes = {
+        'A' : (0,0),
+        'B' : (7,6)
+    }
+    # F = G + H
+    count = 0
+    open_set = PriorityQueue()
+    open_set.put((0, count, start)) # 0 is the f score
+    came_from = {}
+    g_score = {spot: float("inf") for row in grid for spot in row}
+    g_score[start] = 0
+    f_score = {spot: float("inf") for row in grid for spot in row}
+    f_score[start] = h(nodes.A, nodes.B)
+
+    open_set_hash = {start}
+
+    while not open_set.empty():
+        current = open_set.get()[2]
+        open_set_hash.remove(current)
+
+        if current == end:
+            pass # make path
+            return True
+        for neighbor in current.neighbors:
+            value = peta[1][0]
+            temp_g_score = g_score[current] + value
+            
+            if temp_g_score < g_score[neighbor]:
+                came_from[neighbor] = current
+                g_score[neighbor] = temp_g_score
+                f_score[neighbor] = temp_g_score + 3 # nanti ganti 3 nya
+                if neighbor not in open_set_hash:
+                    count += 1
+                    open_set.put((f_score, count, neighbor))
+                    open_set_hash.add(neighbor)
+                    neighbor.make_open() #bikin make open
+        if current != start:
+            current.make_closed()
+
+    return False
 
 root.mainloop()
