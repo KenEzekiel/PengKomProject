@@ -7,6 +7,7 @@ import sys
 # representation of the graph
  
 from collections import defaultdict
+from GUI_main_program import peta
  
 #Class to represent a graph
 class Graph:
@@ -108,6 +109,7 @@ class Graph:
         # print the constructed distance array
         self.printSolution(dist,parent)
 
+'''
 peta = [[1, 2, 2, 2, 2, 0, 0, 0],
         [2, 0, 0, 0, 2, 0, 0, 0],
         [2, 0, 0, 0, 2, 1, 1, 1],
@@ -116,6 +118,7 @@ peta = [[1, 2, 2, 2, 2, 0, 0, 0],
         [1, 0, 0, 0, 1, 1, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1]]
+'''
 
 def node_ae():
         value_ae = 4
