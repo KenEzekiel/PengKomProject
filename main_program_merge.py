@@ -11,12 +11,10 @@ from queue import PriorityQueue
 root = Tk()
 root.title("Map") 
 root.iconbitmap("resources/logo_itb.ico")
-# root.attributes('-alpha', 0.9)
 
 Font_tuple = ("Colibri", 10)
-# canvas = tkinter.Canvas(root)
-# canvas.place(x=0, y=0)
 
+# Initial map
 peta = [[1, 1, 1, 1, 1, 0, 0, 0],
         [1, 0, 0, 0, 1, 0, 0, 0],
         [1, 0, 0, 0, 1, 1, 1, 1],
@@ -26,6 +24,7 @@ peta = [[1, 1, 1, 1, 1, 0, 0, 0],
         [1, 0, 0, 0, 1, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1]]
 
+# Set images
 road = ImageTk.PhotoImage(Image.open("resources/road.png"))
 grass = ImageTk.PhotoImage(Image.open("resources/grass.png"))
 car = ImageTk.PhotoImage(Image.open("resources/car.png"))
@@ -38,8 +37,7 @@ background_image = PhotoImage(file="resources/Wallpaper.png")
 background_label = Label(root, image=background_image)
 background_label.place(x=0, y=0)
 
-# List Destinasi pre-determined agar mengurangi kekompleksan, 
-# kedepannya bisa diganti menjadi suatu koordinat
+# List Destinasi pre-determined agar mengurangi kekompleksan
 # dimana x = i, x >= 0, dan y = -j, y >= 0
 # y = -j berarti koordinat di kuadran 4, tetapi dianggap di kuadran 1
 destination_list = [("Bandung", "Bandung"), 
@@ -49,21 +47,24 @@ destination_list = [("Bandung", "Bandung"),
 
 def positionVehicle():
     # Generates the number of cars that will add traffic
-    number_of_cars = rd.randint(1, 10)
+    number_of_cars = rd.randint(1, 10)  # randomize the number of cars
     for x in range(number_of_cars):
-        not_found = True
-        while not_found:
+        not_found = True                # loops to position the cars
+        while not_found:                # uses while to make sure every car is placed
+            # randomize the coordinate
             i = rd.randint(0, len(peta)-1)
             j = rd.randint(0, len(peta[i])-1)
-            if peta[i][j] == 1:
+            if peta[i][j] == 1:         # checks whether the coordinate is a road or not
                 peta[i][j] += 1
                 not_found = False
 positionVehicle()
 
+# Clears or delete the item
 def clear_frame(item):
    for widgets in item.winfo_children():
       widgets.destroy()
     
+# Making a frame to put the map in
 frame_peta = LabelFrame(root, 
                         text="Map", 
                         padx=10, 
@@ -72,6 +73,7 @@ frame_peta = LabelFrame(root,
                         bg="#B6D6EB")
 frame_peta.grid(row=1, column=1, columnspan=2)
 
+# Function to print the map inside the frame coordinate by coordinate
 def framePeta():
     global labelpeta
     global frame_peta
@@ -91,6 +93,7 @@ def framePeta():
             image.grid(row=i, column=j, ipadx=0, ipady=0)
 # framePeta()
 
+# Function to print the destinations inside the destination frame
 def destinationList():
     frame_destination = LabelFrame(root, 
                                 text="Destination list", 
@@ -106,14 +109,16 @@ def destinationList():
                                     bg="#B6D6EB")
             destination_label.pack()
 # destinationList()
+# commented out because the feature is not used
 
-def switch():
-    global myButton
-    if myButton["state"] == NORMAL:
-        myButton["state"] = DISABLED
+# Function to disable a button
+def switch(button):
+    if button["state"] == NORMAL:
+        button["state"] = DISABLED
     else:
-        myButton["state"] = NORMAL
+        button["state"] = NORMAL
 
+# Function to update the map when a different location is picked
 def myClick():
     global first_location_coordinate
     global final_location_coordinate
@@ -125,6 +130,7 @@ def myClick():
     final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
     framePeta()
 
+# Function to print radio buttons inside a frame to get user input
 def declareLocation():
     global label_awal
     global entry_lokasi_awal
@@ -149,10 +155,11 @@ def declareLocation():
         radio_akhir.grid()
 declareLocation()
 
-# Deklarasi frame lokasi
+# Declare location frame
 frame_lokasi = LabelFrame(root, text="", bg="#B6D6EB", width=50)
 frame_lokasi.grid(row=5, column=1, columnspan=2)
 
+# Function to get user input and prints it into a frame
 def userInput():
     lokasi_awal = entry_lokasi_awal.get()
     label_awal = Label(frame_lokasi, text="Lokasi awal yang dipilih adalah " + lokasi_awal, font=Font_tuple, bg="#B6D6EB")
@@ -161,7 +168,8 @@ def userInput():
     lokasi_akhir = entry_lokasi_akhir.get()
     label_akhir = Label(frame_lokasi, text="Lokasi akhir yang dipilih adalah " + lokasi_akhir, font=Font_tuple, bg="#B6D6EB")
     label_akhir.grid(row=2, column=1)
-   
+
+# Function to map user input's location into coordinates
 def locationFinder(lokasi):
     if lokasi == "Bandung":
         return([0, 0])
@@ -288,6 +296,7 @@ class Graph:
         # print the constructed distance array
         self.printSolution(dist,parent)
 
+# Making a function to calculate the distance between the nodes
 def node_ae():
         value_ae = 4
         for i in range (1,5):
@@ -589,7 +598,7 @@ def node_je():
     return value_je
  
 g= Graph()
-#sumber dari bandung         
+# Graph with Bandung Source        
 graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [node_ba(),0,node_bc(),0,0,0,0,0,0,0,0,0],
         [0,node_cb(),0,node_cd(),0,node_cf(),0,0,0,0,0,0],
@@ -608,8 +617,9 @@ graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
 # g.dijkstra(graph,0)
 
 def startClick():
-    switch()
-    Graph().dijkstra(graph, 0)
+    switch(myButton)            # Disable myButton
+    Graph().dijkstra(graph, 0)  # running the algorithm
+    switch(startButton)         # Disable startButton
 
 # Deklarasi button
 myButton = Button(root, 
@@ -625,5 +635,21 @@ startButton = Button(root,
                     width=50, 
                     font=Font_tuple)
 startButton.grid(row=6, column=1, columnspan=2)
+
+nodes = {
+    # node : [y, x]
+    0 : [0, 0],
+    1 : [0, 4],
+    2 : [2, 4],
+    3 : [2, 7],
+    4 : [4, 0],
+    5 : [4, 4],
+    6 : [5, 4],
+    7 : [5, 7],
+    8 : [6, 7],
+    9 : [7, 0],
+    10 : [7, 4],
+    11 : [7, 7]
+}
 
 root.mainloop()

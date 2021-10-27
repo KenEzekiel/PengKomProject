@@ -7,7 +7,6 @@ import tkinter
 from PIL import ImageTk, Image
 import random as rd
 from queue import PriorityQueue
-from dijkstra_algoritm_update import *
 
 root = Tk()
 root.title("Map") 
