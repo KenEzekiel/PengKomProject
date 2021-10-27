@@ -7,13 +7,14 @@ import tkinter
 from PIL import ImageTk, Image
 import random as rd
 from queue import PriorityQueue
+from dijkstra_algoritm_update import *
 
 root = Tk()
 root.title("Map") 
 root.iconbitmap("resources/logo_itb.ico")
 # root.attributes('-alpha', 0.9)
 
-Font_tuple = ("Product sans", 10, "bold")
+Font_tuple = ("Colibri", 10)
 # canvas = tkinter.Canvas(root)
 # canvas.place(x=0, y=0)
 
@@ -49,7 +50,7 @@ destination_list = [("Bandung", "Bandung"),
 
 def positionVehicle():
     # Generates the number of cars that will add traffic
-    number_of_cars = rd.randint(0, 10)
+    number_of_cars = rd.randint(1, 10)
     for x in range(number_of_cars):
         not_found = True
         while not_found:
