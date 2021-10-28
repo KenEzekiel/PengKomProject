@@ -295,8 +295,17 @@ class Graph:
  
         # print the constructed distance array
         self.printSolution(dist,parent)
+'''
+peta = [[2, 2, 2, 2, 2, 0, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0, 0],
+        [1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]]
+'''
 
-# Making a function to calculate the distance between the nodes
 def node_ae():
         value_ae = 4
         for i in range (1,5):
@@ -536,7 +545,8 @@ def node_lk():
             else :
                 value_lk+=0
     return value_lk 
-                        
+    
+                    
 def node_kj(): 
     value_kj = 4
     for i in range (7,8):
@@ -598,8 +608,8 @@ def node_je():
     return value_je
  
 g= Graph()
-# Graph with Bandung Source        
-graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
+          
+graph_Bandung = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [node_ba(),0,node_bc(),0,0,0,0,0,0,0,0,0],
         [0,node_cb(),0,node_cd(),0,node_cf(),0,0,0,0,0,0],
         [0,0,node_dc(),0,0,0,0,node_dh(),0,0,0,0],
@@ -612,9 +622,51 @@ graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [0,0,0,0,0,0,node_kg(),0,0,node_kj(),0,node_kl()],
         [0,0,0,0,0,0,0,0,node_li(),0,node_lk(),0]
         ]
+graph_ITB = [
+        [0,node_ba(),0,0,0,0,0,0,0,node_bc(),0,0],
+        [0,0,node_ae(),0,0,0,0,0,0,0,0,0],
+        [0,node_ea(),0,node_ej(),0,0,0,0,0,0,0,0],
+        [0,0,node_je(),0,node_jk(),0,0,0,0,0,0,0],
+        [0,0,0,node_kj(),0,node_kl(),0,0,0,0,0,node_kg()],
+        [0,0,0,0,node_lk(),0,node_li(),0,0,0,0,0],
+        [0,0,0,0,0,node_il(),0,node_ih(),0,0,0,0],
+        [0,0,0,0,0,0,node_hi(),0,node_hd(),0,0,node_hg()],
+        [0,0,0,0,0,0,0,node_dh(),0,node_dc(),0,0],
+        [node_cb(),0,0,0,0,0,0,0,node_cd(),0,node_cf(),0],
+        [0,0,0,0,0,0,0,0,0,node_fc(),0,node_fg()],
+        [0,0,0,0,node_gk(),0,0,node_gh(),0,0,node_gf(),0],
+        ]
+graph_Jakarta = [
+        [0,node_il(),0,0,0,0,0,0,0,0,node_ih(),0],
+        [node_li(),0,node_lk(),0,0,0,0,0,0,0,0,0],
+        [0,node_kl(),0,node_kj(),0,0,0,0,0,node_kg(),0,0],
+        [0,0,node_jk(),0,node_je(),0,0,0,0,0,0,0],
+        [0,0,0,node_ej(),0,node_ea(),0,0,node_ef(),0,0,0],
+        [0,0,0,0,node_ae(),0,node_ab(),0,0,0,0,0],
+        [0,0,0,0,0,node_ba(),0,node_bc(),0,0,0,0],
+        [0,0,0,0,0,0,node_cb(),0,node_cf(),0,0,node_cd()],
+        [0,0,0,0,node_fe(),0,0,node_fc(),0,node_fg(),0,0],
+        [0,0,node_gk(),0,0,0,0,0,node_gf(),0,node_gh(),0],
+        [node_hi(),0,0,0,0,0,0,0,0,node_hg(),0,node_hd()],
+        [0,0,0,0,0,0,0,node_dc(),0,0,node_dh(),0],
+        ]
 
+graph_Bogor = [
+        [0,node_je(),0,0,0,0,0,node_jk(),0,0,0,0],
+        [node_ej(),0,node_ea(),0,0,node_ef(),0,0,0,0,0,0],
+        [0,node_ae(),0,node_ab(),0,0,0,0,0,0,0,0],
+        [0,0,node_ba(),0,node_bc(),0,0,0,0,0,0,0],
+        [0,0,0,node_cb(),0,node_cf(),0,0,0,0,0,node_cd()],
+        [0,node_fe(),0,0,node_fc(),0,node_fg(),0,0,0,0,0],
+        [0,0,0,0,0,node_gf(),0,node_gk(),0,0,node_gh(),0],
+        [node_kj(),0,0,0,0,0,node_kg(),0,node_kl(),0,0,0],
+        [0,0,0,0,0,0,0,node_lk(),0,node_li(),0,0],
+        [0,0,0,0,0,0,0,0,node_il(),0,node_ih(),0],
+        [0,0,0,0,0,0,node_hg(),0,0,node_hi(),0,node_hd()],
+        [0,0,0,0,node_dc(),0,0,0,0,0,node_dh(),0],
+        ]
 # Print the solution
-# g.dijkstra(graph,0)
+g.dijkstra(graph_ITB,0)
 
 def startClick():
     switch(myButton)            # Disable myButton
