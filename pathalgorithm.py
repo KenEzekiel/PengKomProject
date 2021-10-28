@@ -36,11 +36,15 @@ class Graph:
          
         #Base Case : If j is source
         if parent[j] == -1  :
-            print (j,end=" "),
+            #print (j)#end=" "),
             return
-        self.printPath(parent , parent[j])
-        print(j,end=" "),
-         
+        self.printPath(parent , parent[j]),
+        z=j 
+        print(z)
+        
+        
+       
+    
  
     # A utility function to print
     # the constructed distance
@@ -54,6 +58,8 @@ class Graph:
                     if i == 1 :
                         print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
                         self.printPath(parent,i)
+                        a = dist[i]
+                        
                         
             if akhir == "Jakarta" or akhir == "jakarta" :
                 src = 0
