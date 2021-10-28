@@ -1,5 +1,210 @@
+# Python program for Dijkstra's
+# single source shortest
+# path algorithm. The program
+# is for adjacency matrix
+# representation of the graph
+ 
+from collections import defaultdict
 
-peta = [[1, 1, 1, 1, 1, 0, 0, 0],
+asal = input("masukkan lokasi awal : ")
+akhir = input("masukkan lokasi akhir : ")
+ 
+#Class to represent a graph
+class Graph:
+ 
+    # A utility function to find the
+    # vertex with minimum dist value, from
+    # the set of vertices still in queue
+    def minDistance(self,dist,queue):
+        # Initialize min value and min_index as -1
+        minimum = float("Inf")
+        min_index = -1
+         
+        # from the dist array,pick one which
+        # has min value and is till in queue
+        for i in range(len(dist)):
+            if dist[i] < minimum and i in queue:
+                minimum = dist[i]
+                min_index = i
+        return min_index
+ 
+ 
+    # Function to print shortest path
+    # from source to j
+    # using parent array
+    def printPath(self, parent, j):
+         
+        #Base Case : If j is source
+        if parent[j] == -1  :
+            print (j,end=" "),
+            return
+        self.printPath(parent , parent[j])
+        print(j,end=" "),
+         
+ 
+    # A utility function to print
+    # the constructed distance
+    # array
+    def printSolution(self, dist, parent):
+        if asal == "Bandung" or asal == "bandung":
+            if akhir == "ITB" or akhir == "itb" :
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 1 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+                        
+            if akhir == "Jakarta" or akhir == "jakarta" :
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 8 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+            
+            if akhir == "Bogor" or akhir == "bogor" :
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 9 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+            
+        if asal == "ITB" or asal == "itb" :
+            if akhir == "Bandung" or akhir == "bandung" :
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 1 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)  
+                        
+            if akhir == "Bogor" or akhir == "bogor":
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 3 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+                        
+            if akhir == "Jakarta" or akhir == "jakarta": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 6 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+                        
+        if asal == "Jakarta" or asal == "jakarta" :
+            if akhir == "Bandung" or akhir == "bandung": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 5 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i) 
+            
+            if akhir == "ITB" or akhir == "itb": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 6 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+            
+            if akhir == "Bogor" or akhir == "bogor": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 3 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i) 
+        
+        if asal == "Bogor" or asal == "bogor" :
+            if akhir == "Bandung" or akhir == "bandung": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 2 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i) 
+            
+            if akhir == "ITB" or akhir == "itb": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 3 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+            
+            if akhir == "Jakarta" or akhir == "jakarta": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 9 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)   
+                
+ 
+    
+    '''Function that implements Dijkstra's single source shortest path
+    algorithm for a graph represented using adjacency matrix
+    representation'''
+    def dijkstra(self, graph, src):
+ 
+        row = len(graph)
+        col = len(graph[0])
+ 
+        # The output array. dist[i] will hold
+        # the shortest distance from src to i
+        # Initialize all distances as INFINITE
+        dist = [float("Inf")] * row
+ 
+        #Parent array to store
+        # shortest path tree
+        parent = [-1] * row
+ 
+        # Distance of source vertex
+        # from itself is always 0
+        dist[src] = 0
+     
+        # Add all vertices in queue
+        queue = []
+        for i in range(row):
+            queue.append(i)
+             
+        #Find shortest path for all vertices
+        while queue:
+ 
+            # Pick the minimum dist vertex
+            # from the set of vertices
+            # still in queue
+            u = self.minDistance(dist,queue)
+        
+            # remove min element    
+            queue.remove(u)
+            
+            # Update dist value and parent
+            # index of the adjacent vertices of
+            # the picked vertex. Consider only
+            # those vertices which are still in
+            # queue
+            for i in range(col):
+                '''Update dist[i] only if it is in queue, there is
+                an edge from u to i, and total weight of path from
+                src to i through u is smaller than current value of
+                dist[i]'''
+                if graph[u][i] and i in queue:
+                    if dist[u] + graph[u][i] < dist[i]:
+                        dist[i] = dist[u] + graph[u][i]
+                        parent[i] = u
+                        
+ 
+        # print the constructed distance array
+        self.printSolution(dist,parent)
+
+peta = [[2, 2, 2, 2, 2, 0, 0, 0],
         [1, 0, 0, 0, 1, 0, 0, 0],
         [1, 0, 0, 0, 1, 1, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 1],
@@ -307,9 +512,11 @@ def node_je():
                 value_je+=1
             else :
                 value_je+=0
-    return value_je          
-
-graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
+    return value_je
+ 
+g= Graph()
+          
+graph_Bandung = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [node_ba(),0,node_bc(),0,0,0,0,0,0,0,0,0],
         [0,node_cb(),0,node_cd(),0,node_cf(),0,0,0,0,0,0],
         [0,0,node_dc(),0,0,0,0,node_dh(),0,0,0,0],
@@ -322,4 +529,55 @@ graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [0,0,0,0,0,0,node_kg(),0,0,node_kj(),0,node_kl()],
         [0,0,0,0,0,0,0,0,node_li(),0,node_lk(),0]
         ]
-print(graph)
+graph_ITB = [
+        [0,node_ba(),0,0,0,0,0,0,0,node_bc(),0,0],
+        [0,0,node_ae(),0,0,0,0,0,0,0,0,0],
+        [0,node_ea(),0,node_ej(),0,0,0,0,0,0,0,0],
+        [0,0,node_je(),0,node_jk(),0,0,0,0,0,0,0],
+        [0,0,0,node_kj(),0,node_kl(),0,0,0,0,0,node_kg()],
+        [0,0,0,0,node_lk(),0,node_li(),0,0,0,0,0],
+        [0,0,0,0,0,node_il(),0,node_ih(),0,0,0,0],
+        [0,0,0,0,0,0,node_hi(),0,node_hd(),0,0,node_hg()],
+        [0,0,0,0,0,0,0,node_dh(),0,node_dc(),0,0],
+        [node_cb(),0,0,0,0,0,0,0,node_cd(),0,node_cf(),0],
+        [0,0,0,0,0,0,0,0,0,node_fc(),0,node_fg()],
+        [0,0,0,0,node_gk(),0,0,node_gh(),0,0,node_gf(),0],
+        ]
+graph_Jakarta = [
+        [0,node_il(),0,0,0,0,0,0,0,0,node_ih(),0],
+        [node_li(),0,node_lk(),0,0,0,0,0,0,0,0,0],
+        [0,node_kl(),0,node_kj(),0,0,0,0,0,node_kg(),0,0],
+        [0,0,node_jk(),0,node_je(),0,0,0,0,0,0,0],
+        [0,0,0,node_ej(),0,node_ea(),0,0,node_ef(),0,0,0],
+        [0,0,0,0,node_ae(),0,node_ab(),0,0,0,0,0],
+        [0,0,0,0,0,node_ba(),0,node_bc(),0,0,0,0],
+        [0,0,0,0,0,0,node_cb(),0,node_cf(),0,0,node_cd()],
+        [0,0,0,0,node_fe(),0,0,node_fc(),0,node_fg(),0,0],
+        [0,0,node_gk(),0,0,0,0,0,node_gf(),0,node_gh(),0],
+        [node_hi(),0,0,0,0,0,0,0,0,node_hg(),0,node_hd()],
+        [0,0,0,0,0,0,0,node_dc(),0,0,node_dh(),0],
+        ]
+
+graph_Bogor = [
+        [0,node_je(),0,0,0,0,0,node_jk(),0,0,0,0],
+        [node_ej(),0,node_ea(),0,0,node_ef(),0,0,0,0,0,0],
+        [0,node_ae(),0,node_ab(),0,0,0,0,0,0,0,0],
+        [0,0,node_ba(),0,node_bc(),0,0,0,0,0,0,0],
+        [0,0,0,node_cb(),0,node_cf(),0,0,0,0,0,node_cd()],
+        [0,node_fe(),0,0,node_fc(),0,node_fg(),0,0,0,0,0],
+        [0,0,0,0,0,node_gf(),0,node_gk(),0,0,node_gh(),0],
+        [node_kj(),0,0,0,0,0,node_kg(),0,node_kl(),0,0,0],
+        [0,0,0,0,0,0,0,node_lk(),0,node_li(),0,0],
+        [0,0,0,0,0,0,0,0,node_il(),0,node_ih(),0],
+        [0,0,0,0,0,0,node_hg(),0,0,node_hi(),0,node_hd()],
+        [0,0,0,0,node_dc(),0,0,0,0,0,node_dh(),0],
+        ]
+# Print the solution
+if asal == "Bandung" or asal == "bandung":
+    g.dijkstra(graph_Bandung,0)
+elif asal == "ITB" or asal == "itb":
+    g.dijkstra(graph_ITB,0)
+elif asal == "Jakarta" or asal == "jakarta":
+    g.dijkstra(graph_Jakarta,0)
+elif asal == "Bogor" or asal == "bogor":  
+    g.dijkstra(graph_Bogor,0)

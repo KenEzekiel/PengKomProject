@@ -485,8 +485,5 @@ graph_Bogor = [
         [0,0,0,0,node_dc(),0,0,0,0,0,node_dh(),0],
         ]
 # Print the solution
-<<<<<<< HEAD:dijkstra_algoritm_update.py .py
 g.dijkstra(graph_ITB,0)
-=======
 # g.dijkstra(graph,0)
->>>>>>> a3327e16a705149c56a39b2aa7cde1db7cc8c3e4:dijkstra_algoritm_update.py
