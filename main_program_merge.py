@@ -652,4 +652,12 @@ nodes = {
     11 : [7, 7]
 }
 
+def highlightMove(point_a, point_b):
+    # node = [Y, X]
+    # The node can only be separated either horizontally or vertically, not both 
+    # Check the Y and X whether it is the same or not
+    if point_a[0] == point_b[0]:
+        pass
+    elif point_a[1] == point_b[1]:
+        pass
 root.mainloop()
