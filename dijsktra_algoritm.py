@@ -123,4 +123,4 @@ graph = [[0,4,0,0,4,0,0,0,0,0,0,0],
         ]
  
 # Print the solution
-g.dijkstra(graph,0)
+# g.dijkstra(graph,0)

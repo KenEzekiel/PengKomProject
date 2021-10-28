@@ -1,3 +1,193 @@
+# Program Map and GUI
+
+# Algoritma
+from tkinter import *
+from tkinter import font
+import tkinter
+from PIL import ImageTk, Image
+import random as rd
+from queue import PriorityQueue
+# --------------------------------------------------------------
+root = Tk()
+root.title("Map") 
+root.iconbitmap("resources/logo_itb.ico")
+
+Font_tuple = ("Colibri", 10)
+
+# Initial map
+peta = [[1, 1, 1, 1, 1, 0, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0, 0],
+        [1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]]
+
+# Set images
+road = ImageTk.PhotoImage(Image.open("resources/road.png"))
+grass = ImageTk.PhotoImage(Image.open("resources/grass.png"))
+car = ImageTk.PhotoImage(Image.open("resources/car.png"))
+dot = ImageTk.PhotoImage(Image.open("resources/dot.png"))
+pin = ImageTk.PhotoImage(Image.open("resources/pin.png"))
+highlight = ImageTk.PhotoImage(Image.open("resources/highlight.png"))
+
+# Background image
+background_image = PhotoImage(file="resources/Wallpaper.png")
+background_label = Label(root, image=background_image)
+background_label.place(x=0, y=0)
+
+# List Destinasi pre-determined agar mengurangi kekompleksan
+# dimana x = i, x >= 0, dan y = -j, y >= 0
+# y = -j berarti koordinat di kuadran 4, tetapi dianggap di kuadran 1
+destination_list = [("Bandung", "Bandung"), 
+                    ("Jakarta", "Jakarta"),
+                    ("ITB", "ITB"),
+                    ("Bogor", "Bogor")]
+
+def positionVehicle():
+    # Generates the number of cars that will add traffic
+    number_of_cars = rd.randint(1, 10)  # randomize the number of cars
+    for x in range(number_of_cars):
+        not_found = True                # loops to position the cars
+        while not_found:                # uses while to make sure every car is placed
+            # randomize the coordinate
+            i = rd.randint(0, len(peta)-1)
+            j = rd.randint(0, len(peta[i])-1)
+            if peta[i][j] == 1:         # checks whether the coordinate is a road or not
+                peta[i][j] += 1
+                not_found = False
+positionVehicle()
+
+# Clears or delete the item
+def clear_frame(item):
+   for widgets in item.winfo_children():
+      widgets.destroy()
+    
+# Making a frame to put the map in
+frame_peta = LabelFrame(root, 
+                        text="Map", 
+                        padx=10, 
+                        pady=10, 
+                        font=Font_tuple, 
+                        bg="#B6D6EB")
+frame_peta.grid(row=1, column=1, columnspan=2)
+
+# Function to print the map inside the frame coordinate by coordinate
+def framePeta():
+    global labelpeta
+    global frame_peta
+    for i in range(len(peta)):
+        for j in range(len(peta[i])):
+            labelpeta = Label(frame_peta, text=peta[i][j])
+            if peta[i][j] == 0:
+                image = Label(frame_peta, image=grass, bg="#B6D6EB")
+            elif (i == first_location_coordinate[0]) and (j == first_location_coordinate[1]):
+                image = Label(frame_peta, image=dot, bg="#B6D6EB")
+            elif (i == final_location_coordinate[0]) and (j == final_location_coordinate[1]):
+                image = Label(frame_peta, image=pin, bg="#B6D6EB")
+            elif peta[i][j] == 1:
+                image = Label(frame_peta, image=road, bg="#B6D6EB")
+            elif peta[i][j] == 2:
+                image = Label(frame_peta, image=car, bg="#B6D6EB")
+            image.grid(row=i, column=j, ipadx=0, ipady=0)
+# framePeta()
+
+# Function to print the destinations inside the destination frame
+def destinationList():
+    frame_destination = LabelFrame(root, 
+                                text="Destination list", 
+                                padx=50, 
+                                pady=50, 
+                                font=Font_tuple, 
+                                bg="#B6D6EB")
+    frame_destination.grid(row=1, column=2)
+    for text, destination in destination_list:
+            destination_label = Label(frame_destination, 
+                                    text=text, 
+                                    font=Font_tuple, 
+                                    bg="#B6D6EB")
+            destination_label.pack()
+# destinationList()
+# commented out because the feature is not used
+
+# Function to disable a button
+def switch(button):
+    if button["state"] == NORMAL:
+        button["state"] = DISABLED
+    else:
+        button["state"] = NORMAL
+
+# Function to update the map when a different location is picked
+def myClick():
+    global first_location_coordinate
+    global final_location_coordinate
+    clear_frame(frame_lokasi)
+    userInput()
+    clear_frame(frame_peta)
+
+    first_location_coordinate = locationFinder(entry_lokasi_awal.get())
+    final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
+    framePeta()
+
+# Function to print radio buttons inside a frame to get user input
+def declareLocation():
+    global label_awal
+    global entry_lokasi_awal
+    global destination_list
+    global label_akhir
+    global entry_lokasi_akhir
+    # Deklarasi lokasi
+    label_awal = LabelFrame(root, text="Lokasi Awal", padx=50, pady=50, font=Font_tuple, bg="#B6D6EB")
+    label_awal.grid(row=3, column=1)
+    entry_lokasi_awal = StringVar()
+    entry_lokasi_awal.set("Bandung")
+    for text, destination in destination_list:
+        radio_awal = Radiobutton(label_awal, text=text, variable=entry_lokasi_awal, value=destination, font=Font_tuple, bg="#B6D6EB")
+        radio_awal.grid()
+
+    label_akhir = LabelFrame(root, text="Lokasi Akhir", padx=50, pady=50, font=Font_tuple, bg="#B6D6EB")
+    label_akhir.grid(row=3, column=2)
+    entry_lokasi_akhir = StringVar()
+    entry_lokasi_akhir.set("Jakarta")
+    for text, destination in destination_list:
+        radio_akhir = Radiobutton(label_akhir, text=text, variable=entry_lokasi_akhir, value=destination, font=Font_tuple, bg="#B6D6EB")
+        radio_akhir.grid()
+declareLocation()
+
+# Declare location frame
+frame_lokasi = LabelFrame(root, text="", bg="#B6D6EB", width=50)
+frame_lokasi.grid(row=5, column=1, columnspan=2)
+
+# Function to get user input and prints it into a frame
+def userInput():
+    lokasi_awal = entry_lokasi_awal.get()
+    label_awal = Label(frame_lokasi, text="Lokasi awal yang dipilih adalah " + lokasi_awal, font=Font_tuple, bg="#B6D6EB")
+    label_awal.grid(row=1, column=1)
+
+    lokasi_akhir = entry_lokasi_akhir.get()
+    label_akhir = Label(frame_lokasi, text="Lokasi akhir yang dipilih adalah " + lokasi_akhir, font=Font_tuple, bg="#B6D6EB")
+    label_akhir.grid(row=2, column=1)
+
+# Function to map user input's location into coordinates
+def locationFinder(lokasi):
+    if lokasi == "Bandung":
+        return([0, 0])
+    elif lokasi == "Jakarta":
+        return([6, 7])
+    elif lokasi == "Bogor":
+        return([7, 0])
+    elif lokasi == "ITB":
+        return([0, 4])
+first_location_coordinate = locationFinder(entry_lokasi_awal.get())
+final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
+framePeta()
+
+# ------------------------------------------------------------------
+# ---------------------Dijkstra's Algorithm-------------------------
+# ------------------------------------------------------------------
+import sys
+
 # Python program for Dijkstra's
 # single source shortest
 # path algorithm. The program
@@ -106,15 +296,7 @@ class Graph:
         # print the constructed distance array
         self.printSolution(dist,parent)
 
-peta = [[2, 2, 2, 2, 2, 0, 0, 0],
-        [1, 0, 0, 0, 1, 0, 0, 0],
-        [1, 0, 0, 0, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1],
-        [1, 0, 0, 0, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]]
-
+# Making a function to calculate the distance between the nodes
 def node_ae():
         value_ae = 4
         for i in range (1,5):
@@ -354,8 +536,7 @@ def node_lk():
             else :
                 value_lk+=0
     return value_lk 
-    
-                    
+                        
 def node_kj(): 
     value_kj = 4
     for i in range (7,8):
@@ -417,8 +598,8 @@ def node_je():
     return value_je
  
 g= Graph()
-          
-graph_Bandung = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
+# Graph with Bandung Source        
+graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [node_ba(),0,node_bc(),0,0,0,0,0,0,0,0,0],
         [0,node_cb(),0,node_cd(),0,node_cf(),0,0,0,0,0,0],
         [0,0,node_dc(),0,0,0,0,node_dh(),0,0,0,0],
@@ -431,48 +612,52 @@ graph_Bandung = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [0,0,0,0,0,0,node_kg(),0,0,node_kj(),0,node_kl()],
         [0,0,0,0,0,0,0,0,node_li(),0,node_lk(),0]
         ]
-graph_ITB = [
-        [0,node_ba(),0,0,0,0,0,0,0,node_bc(),0,0],
-        [0,0,node_ae(),0,0,0,0,0,0,0,0,0],
-        [0,node_ea(),0,node_ej(),0,0,0,0,0,0,0,0],
-        [0,0,node_je(),0,node_jk(),0,0,0,0,0,0,0],
-        [0,0,0,node_kj(),0,node_kl(),0,0,0,0,0,node_kg()],
-        [0,0,0,0,node_lk(),0,node_li(),0,0,0,0,0],
-        [0,0,0,0,0,node_il(),0,node_ih(),0,0,0,0],
-        [0,0,0,0,0,0,node_hi(),0,node_hd(),0,0,node_hg()],
-        [0,0,0,0,0,0,0,node_dh(),0,node_dc(),0,0],
-        [node_cb(),0,0,0,0,0,0,0,node_cd(),0,node_cf(),0],
-        [0,0,0,0,0,0,0,0,0,node_fc(),0,node_fg()],
-        [0,0,0,0,node_gk(),0,0,node_gh(),0,0,node_gf(),0],
-        ]
-graph_Jakarta = [
-        [0,node_il(),0,0,0,0,0,0,0,0,node_ih(),0],
-        [node_li(),0,node_lk(),0,0,0,0,0,0,0,0,0],
-        [0,node_kl(),0,node_kj(),0,0,0,0,0,node_kg(),0,0],
-        [0,0,node_jk(),0,node_je(),0,0,0,0,0,0,0],
-        [0,0,0,node_ej(),0,node_ea(),0,0,node_ef(),0,0,0],
-        [0,0,0,0,node_ae(),0,node_ab(),0,0,0,0,0],
-        [0,0,0,0,0,node_ba(),0,node_bc(),0,0,0,0],
-        [0,0,0,0,0,0,node_cb(),0,node_cf(),0,0,node_cd()],
-        [0,0,0,0,node_fe(),0,0,node_fc(),0,node_fg(),0,0],
-        [0,0,node_gk(),0,0,0,0,0,node_gf(),0,node_gh(),0],
-        [node_hi(),0,0,0,0,0,0,0,0,node_hg(),0,node_hd()],
-        [0,0,0,0,0,0,0,node_dc(),0,0,node_dh(),0],
-        ]
 
-graph_Bogor = [
-        [0,node_je(),0,0,0,0,0,node_jk(),0,0,0,0],
-        [node_ej(),0,node_ea(),0,0,node_ef(),0,0,0,0,0,0],
-        [0,node_ae(),0,node_ab(),0,0,0,0,0,0,0,0],
-        [0,0,node_ba(),0,node_bc(),0,0,0,0,0,0,0],
-        [0,0,0,node_cb(),0,node_cf(),0,0,0,0,0,node_cd()],
-        [0,node_fe(),0,0,node_fc(),0,node_fg(),0,0,0,0,0],
-        [0,0,0,0,0,node_gf(),0,node_gk(),0,0,node_gh(),0],
-        [node_kj(),0,0,0,0,0,node_kg(),0,node_kl(),0,0,0],
-        [0,0,0,0,0,0,0,node_lk(),0,node_li(),0,0],
-        [0,0,0,0,0,0,0,0,node_il(),0,node_ih(),0],
-        [0,0,0,0,0,0,node_hg(),0,0,node_hi(),0,node_hd()],
-        [0,0,0,0,node_dc(),0,0,0,0,0,node_dh(),0],
-        ]
 # Print the solution
-g.dijkstra(graph_ITB,0)
+# g.dijkstra(graph,0)
+
+def startClick():
+    switch(myButton)            # Disable myButton
+    Graph().dijkstra(graph, 0)  # running the algorithm
+    switch(startButton)         # Disable startButton
+
+# Deklarasi button
+myButton = Button(root, 
+                text="Konfirmasi Destinasi", 
+                command=myClick, bg="#B6D6EB", 
+                width=50, 
+                font=Font_tuple)
+myButton.grid(row=4, column=1, columnspan=2)
+
+startButton = Button(root, 
+                    text="Start Program",
+                    command=startClick, bg="#B6D6EB", 
+                    width=50, 
+                    font=Font_tuple)
+startButton.grid(row=6, column=1, columnspan=2)
+
+nodes = {
+    # node : [y, x]
+    0 : [0, 0],
+    1 : [0, 4],
+    2 : [2, 4],
+    3 : [2, 7],
+    4 : [4, 0],
+    5 : [4, 4],
+    6 : [5, 4],
+    7 : [5, 7],
+    8 : [6, 7],
+    9 : [7, 0],
+    10 : [7, 4],
+    11 : [7, 7]
+}
+
+def highlightMove(point_a, point_b):
+    # node = [Y, X]
+    # The node can only be separated either horizontally or vertically, not both 
+    # Check the Y and X whether it is the same or not
+    if point_a[0] == point_b[0]:
+        pass
+    elif point_a[1] == point_b[1]:
+        pass
+root.mainloop()
