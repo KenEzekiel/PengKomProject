@@ -1,5 +1,3 @@
-import sys
-
 # Python program for Dijkstra's
 # single source shortest
 # path algorithm. The program
@@ -108,11 +106,11 @@ class Graph:
         # print the constructed distance array
         self.printSolution(dist,parent)
 
-peta = [[1, 2, 2, 2, 2, 0, 0, 0],
-        [2, 0, 0, 0, 2, 0, 0, 0],
-        [2, 0, 0, 0, 2, 1, 1, 1],
-        [2, 0, 0, 0, 2, 0, 0, 1],
-        [2, 2, 2, 2, 2, 0, 0, 1],
+peta = [[2, 2, 2, 2, 2, 0, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0, 0],
+        [1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1],
         [1, 0, 0, 0, 1, 1, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1]]
@@ -419,8 +417,8 @@ def node_je():
     return value_je
  
 g= Graph()
-#sumber dari bandung         
-graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
+          
+graph_Bandung = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [node_ba(),0,node_bc(),0,0,0,0,0,0,0,0,0],
         [0,node_cb(),0,node_cd(),0,node_cf(),0,0,0,0,0,0],
         [0,0,node_dc(),0,0,0,0,node_dh(),0,0,0,0],
@@ -433,6 +431,48 @@ graph = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [0,0,0,0,0,0,node_kg(),0,0,node_kj(),0,node_kl()],
         [0,0,0,0,0,0,0,0,node_li(),0,node_lk(),0]
         ]
+graph_ITB = [
+        [0,node_ba(),0,0,0,0,0,0,0,node_bc(),0,0],
+        [0,0,node_ae(),0,0,0,0,0,0,0,0,0],
+        [0,node_ea(),0,node_ej(),0,0,0,0,0,0,0,0],
+        [0,0,node_je(),0,node_jk(),0,0,0,0,0,0,0],
+        [0,0,0,node_kj(),0,node_kl(),0,0,0,0,0,node_kg()],
+        [0,0,0,0,node_lk(),0,node_li(),0,0,0,0,0],
+        [0,0,0,0,0,node_il(),0,node_ih(),0,0,0,0],
+        [0,0,0,0,0,0,node_hi(),0,node_hd(),0,0,node_hg()],
+        [0,0,0,0,0,0,0,node_dh(),0,node_dc(),0,0],
+        [node_cb(),0,0,0,0,0,0,0,node_cd(),0,node_cf(),0],
+        [0,0,0,0,0,0,0,0,0,node_fc(),0,node_fg()],
+        [0,0,0,0,node_gk(),0,0,node_gh(),0,0,node_gf(),0],
+        ]
+graph_Jakarta = [
+        [0,node_il(),0,0,0,0,0,0,0,0,node_ih(),0],
+        [node_li(),0,node_lk(),0,0,0,0,0,0,0,0,0],
+        [0,node_kl(),0,node_kj(),0,0,0,0,0,node_kg(),0,0],
+        [0,0,node_jk(),0,node_je(),0,0,0,0,0,0,0],
+        [0,0,0,node_ej(),0,node_ea(),0,0,node_ef(),0,0,0],
+        [0,0,0,0,node_ae(),0,node_ab(),0,0,0,0,0],
+        [0,0,0,0,0,node_ba(),0,node_bc(),0,0,0,0],
+        [0,0,0,0,0,0,node_cb(),0,node_cf(),0,0,node_cd()],
+        [0,0,0,0,node_fe(),0,0,node_fc(),0,node_fg(),0,0],
+        [0,0,node_gk(),0,0,0,0,0,node_gf(),0,node_gh(),0],
+        [node_hi(),0,0,0,0,0,0,0,0,node_hg(),0,node_hd()],
+        [0,0,0,0,0,0,0,node_dc(),0,0,node_dh(),0],
+        ]
 
+graph_Bogor = [
+        [0,node_je(),0,0,0,0,0,node_jk(),0,0,0,0],
+        [node_ej(),0,node_ea(),0,0,node_ef(),0,0,0,0,0,0],
+        [0,node_ae(),0,node_ab(),0,0,0,0,0,0,0,0],
+        [0,0,node_ba(),0,node_bc(),0,0,0,0,0,0,0],
+        [0,0,0,node_cb(),0,node_cf(),0,0,0,0,0,node_cd()],
+        [0,node_fe(),0,0,node_fc(),0,node_fg(),0,0,0,0,0],
+        [0,0,0,0,0,node_gf(),0,node_gk(),0,0,node_gh(),0],
+        [node_kj(),0,0,0,0,0,node_kg(),0,node_kl(),0,0,0],
+        [0,0,0,0,0,0,0,node_lk(),0,node_li(),0,0],
+        [0,0,0,0,0,0,0,0,node_il(),0,node_ih(),0],
+        [0,0,0,0,0,0,node_hg(),0,0,node_hi(),0,node_hd()],
+        [0,0,0,0,node_dc(),0,0,0,0,0,node_dh(),0],
+        ]
 # Print the solution
-g.dijkstra(graph,0)
+g.dijkstra(graph_ITB,0)
