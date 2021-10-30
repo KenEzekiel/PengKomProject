@@ -32,14 +32,15 @@ class Graph:
     # Function to print shortest path
     # from source to j
     # using parent array
+    global z
+    z =[]
     def printPath(self, parent, j):
-         
         #Base Case : If j is source
         if parent[j] == -1  :
             #print (j)#end=" "),
             return
         self.printPath(parent , parent[j]),
-        z=j 
+        z.append(j)
         print(z)
         
         

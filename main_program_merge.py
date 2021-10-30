@@ -23,6 +23,7 @@ peta = [[1, 1, 1, 1, 1, 0, 0, 0],
         [1, 0, 0, 0, 1, 1, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1]]
+init_map = peta
 
 # Set images
 road = ImageTk.PhotoImage(Image.open("resources/road.png"))
@@ -47,7 +48,7 @@ destination_list = [("Bandung", "Bandung"),
 
 def positionVehicle():
     # Generates the number of cars that will add traffic
-    number_of_cars = rd.randint(1, 10)  # randomize the number of cars
+    number_of_cars = rd.randint(3, 12)  # randomize the number of cars
     for x in range(number_of_cars):
         not_found = True                # loops to position the cars
         while not_found:                # uses while to make sure every car is placed
@@ -84,6 +85,8 @@ def framePeta():
                 image = Label(frame_peta, image=grass, bg="#B6D6EB")
             elif (i == first_location_coordinate[0]) and (j == first_location_coordinate[1]):
                 image = Label(frame_peta, image=dot, bg="#B6D6EB")
+            elif peta[i][j] == 5:
+                image = Label(frame_peta, image=highlight, bg="#B6D6EB")
             elif (i == final_location_coordinate[0]) and (j == final_location_coordinate[1]):
                 image = Label(frame_peta, image=pin, bg="#B6D6EB")
             elif peta[i][j] == 1:
@@ -183,6 +186,13 @@ first_location_coordinate = locationFinder(entry_lokasi_awal.get())
 final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
 framePeta()
 
+def getLocation():
+    global asal
+    global akhir
+    asal = entry_lokasi_awal.get()
+    akhir = entry_lokasi_akhir.get()
+getLocation()
+
 # ------------------------------------------------------------------
 # ---------------------Dijkstra's Algorithm-------------------------
 # ------------------------------------------------------------------
@@ -219,27 +229,126 @@ class Graph:
     # Function to print shortest path
     # from source to j
     # using parent array
+    global z
+    z =[0]
     def printPath(self, parent, j):
-         
         #Base Case : If j is source
-        if parent[j] == -1 :
-            print (j,end=" "),
+        if parent[j] == -1  :
+            #print (j)#end=" "),
             return
-        self.printPath(parent , parent[j])
-        print(j,end=" "),
-         
- 
+        self.printPath(parent , parent[j]),
+        z.append(j)
+        print(z)
+        
+        
     # A utility function to print
     # the constructed distance
     # array
     def printSolution(self, dist, parent):
-        src = 0
-        print("Vertex \t\tDistance from Source\tPath")
-        for i in range(1, len(dist)):
-            print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])),
-            self.printPath(parent,i)
+        if asal == "Bandung" or asal == "bandung":
+            if akhir == "ITB" or akhir == "itb" :
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 1 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+                        a = dist[i]
+                        
+                        
+            if akhir == "Jakarta" or akhir == "jakarta" :
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 8 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+            
+            if akhir == "Bogor" or akhir == "bogor" :
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 9 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+            
+        if asal == "ITB" or asal == "itb" :
+            if akhir == "Bandung" or akhir == "bandung" :
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 1 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)  
+                        
+            if akhir == "Bogor" or akhir == "bogor":
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 3 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+                        
+            if akhir == "Jakarta" or akhir == "jakarta": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 6 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+                        
+        if asal == "Jakarta" or asal == "jakarta" :
+            if akhir == "Bandung" or akhir == "bandung": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 5 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i) 
+            
+            if akhir == "ITB" or akhir == "itb": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 6 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+            
+            if akhir == "Bogor" or akhir == "bogor": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 3 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i) 
+        
+        if asal == "Bogor" or asal == "bogor" :
+            if akhir == "Bandung" or akhir == "bandung": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 2 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i) 
+            
+            if akhir == "ITB" or akhir == "itb": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 3 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)
+            
+            if akhir == "Jakarta" or akhir == "jakarta": 
+                src = 0
+                print("Vertex \t\tDistance from Source\tPath")
+                for i in range(1, len(dist)):
+                    if i == 9 :
+                        print("\n%d --> %d \t\t%d \t\t\t\t\t" % (src, i, dist[i])) 
+                        self.printPath(parent,i)   
+                
  
- 
+    
     '''Function that implements Dijkstra's single source shortest path
     algorithm for a graph represented using adjacency matrix
     representation'''
@@ -273,10 +382,10 @@ class Graph:
             # from the set of vertices
             # still in queue
             u = self.minDistance(dist,queue)
- 
+        
             # remove min element    
             queue.remove(u)
- 
+            
             # Update dist value and parent
             # index of the adjacent vertices of
             # the picked vertex. Consider only
@@ -291,7 +400,7 @@ class Graph:
                     if dist[u] + graph[u][i] < dist[i]:
                         dist[i] = dist[u] + graph[u][i]
                         parent[i] = u
- 
+                        
  
         # print the constructed distance array
         self.printSolution(dist,parent)
@@ -622,6 +731,7 @@ graph_Bandung = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
         [0,0,0,0,0,0,node_kg(),0,0,node_kj(),0,node_kl()],
         [0,0,0,0,0,0,0,0,node_li(),0,node_lk(),0]
         ]
+
 graph_ITB = [
         [0,node_ba(),0,0,0,0,0,0,0,node_bc(),0,0],
         [0,0,node_ae(),0,0,0,0,0,0,0,0,0],
@@ -636,6 +746,7 @@ graph_ITB = [
         [0,0,0,0,0,0,0,0,0,node_fc(),0,node_fg()],
         [0,0,0,0,node_gk(),0,0,node_gh(),0,0,node_gf(),0],
         ]
+
 graph_Jakarta = [
         [0,node_il(),0,0,0,0,0,0,0,0,node_ih(),0],
         [node_li(),0,node_lk(),0,0,0,0,0,0,0,0,0],
@@ -666,12 +777,133 @@ graph_Bogor = [
         [0,0,0,0,node_dc(),0,0,0,0,0,node_dh(),0],
         ]
 # Print the solution
-g.dijkstra(graph_ITB,0)
+
+def run(a):
+    if a == "Bandung" or a == "bandung":
+        g.dijkstra(graph_Bandung,0)
+    elif a == "ITB" or a == "itb":
+        g.dijkstra(graph_ITB,0)
+    elif a == "Jakarta" or a == "jakarta":
+        g.dijkstra(graph_Jakarta,0)
+    elif a == "Bogor" or a == "bogor":  
+        g.dijkstra(graph_Bogor,0)
+
+# Dictionary nodes to coordinate
+nodes_bandung = {
+    # node : [y, x]
+    0 : [0, 0],
+    1 : [0, 4],
+    2 : [2, 4],
+    3 : [2, 7],
+    4 : [4, 0],
+    5 : [4, 4],
+    6 : [5, 4],
+    7 : [5, 7],
+    8 : [6, 7],
+    9 : [7, 0],
+    10 : [7, 4],
+    11 : [7, 7]
+}
+
+nodes_jakarta = {
+    # node : [y, x]
+    0 : nodes_bandung[8],
+    1 : nodes_bandung[11],
+    2 : nodes_bandung[10],
+    3 : nodes_bandung[9],
+    4 : nodes_bandung[4],
+    5 : nodes_bandung[0],
+    6 : nodes_bandung[1],
+    7 : nodes_bandung[2],
+    8 : nodes_bandung[5],
+    9 : nodes_bandung[6],
+    10 : nodes_bandung[7],
+    11 : nodes_bandung[3]
+}
+
+nodes_ITB = {
+    0 : nodes_bandung[1],
+    1 : nodes_bandung[0],
+    2 : nodes_bandung[4],
+    3 : nodes_bandung[9],
+    4 : nodes_bandung[10],
+    5 : nodes_bandung[11],
+    6 : nodes_bandung[8],
+    7 : nodes_bandung[7],
+    8 : nodes_bandung[3],
+    9 : nodes_bandung[2],
+    10 : nodes_bandung[5],
+    11 : nodes_bandung[6]
+}
+
+nodes_bogor = {
+    0 : nodes_bandung[9],
+    1 : nodes_bandung[4],
+    2 : nodes_bandung[0],
+    3 : nodes_bandung[1],
+    4 : nodes_bandung[2],
+    5 : nodes_bandung[5],
+    6 : nodes_bandung[6],
+    7 : nodes_bandung[10],
+    8 : nodes_bandung[11],
+    9 : nodes_bandung[8],
+    10 : nodes_bandung[7],
+    11 : nodes_bandung[3]
+}
+
+def highlightMove(point_a, point_b):
+    # node = [Y, X]
+    # The node can only be separated either horizontally or vertically, not both 
+    # Check the Y and X whether it is the same or not
+    if point_a[0] == point_b[0]:                        # Jika Y sama, X pasti berbeda
+        if point_a[1] < point_b[1]:                     # Jika Xa < Xb, gerak ke kanan
+            for i in range(point_a[1], point_b[1]+1, 1):  # Untuk update X nya
+                peta[point_a[0]][i] = 5
+        elif point_a[1] > point_b[1]:
+            for i in range(point_b[1], point_a[1]+1, 1):  # Untuk update X nya
+                peta[point_a[0]][i] = 5
+    elif point_a[1] == point_b[1]:                      # Jika X sama, Y pasti berbeda
+        if point_a[0] < point_b[0]:                     # Jika Ya < Yb, gerak ke kanan
+            for i in range(point_a[0], point_b[0]+1, 1):  # Untuk update X nya
+                peta[i][point_a[1]] = 5
+        elif point_a[0] > point_b[0]:                   # Jika Ya > Yb, gerak ke kiri (ke kanan dari b)
+            for i in range(point_b[0], point_a[0]+1, 1):  # Untuk update X nya
+                peta[i][point_a[1]] = 5
+
+def updateMap(tipe):
+    clear_frame(frame_peta)
+    if tipe == "Bandung":
+        # Uses nodes_bandung
+        for i in range(len(z)-1):
+            a = int(z[i])
+            b = int(z[i+1])
+            highlightMove(nodes_bandung[a], nodes_bandung[b])
+    elif tipe == "Bogor":
+        # Uses nodes_bogor
+        for i in range(len(z)-1):
+            a = int(z[i])
+            b = int(z[i+1])
+            highlightMove(nodes_bogor[a], nodes_bogor[b])
+    elif tipe == "Jakarta":
+        # Uses nodes_jakarta
+        for i in range(len(z)-1):
+            a = int(z[i])
+            b = int(z[i+1])
+            highlightMove(nodes_jakarta[a], nodes_jakarta[b])
+    elif tipe == "ITB":
+        # Uses nodes_ITB
+        for i in range(len(z)-1):
+            a = int(z[i])
+            b = int(z[i+1])
+            highlightMove(nodes_ITB[a], nodes_ITB[b])
+    framePeta()
 
 def startClick():
+    getLocation()               # Update location
     switch(myButton)            # Disable myButton
-    Graph().dijkstra(graph, 0)  # running the algorithm
+    run(asal)                   # Running the algorithm
     switch(startButton)         # Disable startButton
+    updateMap(asal)             # Update Map
 
 # Deklarasi button
 myButton = Button(root, 
@@ -688,28 +920,4 @@ startButton = Button(root,
                     font=Font_tuple)
 startButton.grid(row=6, column=1, columnspan=2)
 
-nodes = {
-    # node : [y, x]
-    0 : [0, 0],
-    1 : [0, 4],
-    2 : [2, 4],
-    3 : [2, 7],
-    4 : [4, 0],
-    5 : [4, 4],
-    6 : [5, 4],
-    7 : [5, 7],
-    8 : [6, 7],
-    9 : [7, 0],
-    10 : [7, 4],
-    11 : [7, 7]
-}
-
-def highlightMove(point_a, point_b):
-    # node = [Y, X]
-    # The node can only be separated either horizontally or vertically, not both 
-    # Check the Y and X whether it is the same or not
-    if point_a[0] == point_b[0]:
-        pass
-    elif point_a[1] == point_b[1]:
-        pass
 root.mainloop()
