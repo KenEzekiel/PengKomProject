@@ -23,7 +23,6 @@ peta = [[1, 1, 1, 1, 1, 0, 0, 0],
         [1, 0, 0, 0, 1, 1, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1]]
-init_map = peta
 
 # Set images
 road = ImageTk.PhotoImage(Image.open("resources/road.png"))
@@ -131,6 +130,7 @@ def myClick():
 
     first_location_coordinate = locationFinder(entry_lokasi_awal.get())
     final_location_coordinate = locationFinder(entry_lokasi_akhir.get())
+    switch(startButton)
     framePeta()
 
 # Function to print radio buttons inside a frame to get user input
@@ -917,7 +917,8 @@ startButton = Button(root,
                     text="Start Program",
                     command=startClick, bg="#B6D6EB", 
                     width=50, 
-                    font=Font_tuple)
+                    font=Font_tuple,
+                    state=DISABLED)
 startButton.grid(row=6, column=1, columnspan=2)
 
 root.mainloop()
