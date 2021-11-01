@@ -1,6 +1,7 @@
 # Program Map and GUI
 
 # Algoritma
+# import every tools that we need 
 from tkinter import *
 from tkinter import font
 import tkinter
@@ -404,17 +405,17 @@ class Graph:
  
         # print the constructed distance array
         self.printSolution(dist,parent)
-'''
-peta = [[2, 2, 2, 2, 2, 0, 0, 0],
+''' imagining the map format 
+peta = [[a, 1, 1, 1, b, 0, 0, 0],
         [1, 0, 0, 0, 1, 0, 0, 0],
-        [1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, c, 1, 1, d],
         [1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1],
-        [1, 0, 0, 0, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]]
+        [e, 1, 1, 1, f, 0, 0, 1],
+        [1, 0, 0, 0, g, 1, 1, h],
+        [1, 0, 0, 0, 1, 0, 0, i],
+        [j, 1, 1, 1, k, 1, 1, l]]
 '''
-
+#make some function to store a distance value from every each node given 
 def node_ae():
         value_ae = 4
         for i in range (1,5):
@@ -715,7 +716,8 @@ def node_je():
             else :
                 value_je+=0
     return value_je
- 
+
+#make an adjascent matrix for every source  
 g= Graph()
           
 graph_Bandung = [[0,node_ab(),0,0,node_ae(),0,0,0,0,0,0,0],
@@ -776,6 +778,7 @@ graph_Bogor = [
         [0,0,0,0,0,0,node_hg(),0,0,node_hi(),0,node_hd()],
         [0,0,0,0,node_dc(),0,0,0,0,0,node_dh(),0],
         ]
+
 # Print the solution
 
 def run(a):
