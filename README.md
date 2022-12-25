@@ -8,6 +8,13 @@ Repository ini akan ditujukan untuk tugas besar pengenalan komputasi kelompok 1
 
 pencarian rute dalam aplikasi google maps
 
+## Fitur
+
+- Tkinter GUI
+- Map
+- Customizable Points of Destination
+- Dijkstra's Shortest Path Algorithm
+
 ## Anggota:
 | Nama               | NIM      |
 |------------------- | -------- | 
